@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EducaMais+ — Documentação do Projeto</title>
+<meta name="description" content="EducaMais+ — plataforma web de educação inclusiva. Diagramas de arquitetura, banco de dados e visão geral do projeto." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #14110f;
+    --panel: #e2a99c;
+    --panel-dark: #d1907f;
+    --paper: #fdfaf6;
+    --paper-alt: #f4ede6;
+    --green: #1f9d55;
+    --green-bright: #2ecc71;
+    --muted: #6b6259;
+    --border: #e6ddd3;
+    --white: #ffffff;
+    --font-display: 'Baloo 2', system-ui, sans-serif;
+    --font-body: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.2; }
+  a { color: var(--green); }
+  .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+  header.hero {
+    background: linear-gradient(180deg, var(--panel) 0%, var(--panel-dark) 100%);
+    padding: 64px 0 56px;
+    text-align: center;
+  }
+  .brand-badge {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-weight: 800;
+    padding: 8px 22px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  .brand-badge span { color: var(--green-bright); }
+  header.hero h1 { font-size: 2.6rem; margin: 0 0 12px; }
+  header.hero p { max-width: 640px; margin: 0 auto 28px; font-size: 1.1rem; }
+
+  .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: 999px; text-decoration: none;
+    font-weight: 700; font-family: var(--font-display); font-size: 0.95rem;
+  }
+  .btn-primary { background: var(--ink); color: var(--white); }
+  .btn-outline { background: transparent; border: 2px solid var(--ink); color: var(--ink); }
+
+  section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+  section h2 { font-size: 1.7rem; margin-bottom: 8px; }
+  section .lead { color: var(--muted); margin-bottom: 32px; max-width: 700px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+  }
+  .card {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .card .icon { font-size: 1.6rem; }
+  .card h3 { margin: 8px 0 6px; font-size: 1.05rem; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+  .diagram-box {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    overflow-x: auto;
+  }
+
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tech-badge {
+    background: var(--paper-alt);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  footer {
+    padding: 40px 0 60px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .placeholder-note {
+    background: var(--paper-alt);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="brand-badge">EducaMais<span>+</span></div>
+    <h1>Educação inclusiva, ao alcance de todos</h1>
+    <p>
+      Plataforma web que centraliza recursos educativos adaptados — vídeos, textos e
+      atividades interativas — para estudantes com necessidades especiais, com
+      ferramentas de acessibilidade e uma comunidade de apoio entre alunos, tutores e
+      responsáveis.
+    </p>
+    <div class="btn-row">
+      <!-- Atualize os links abaixo após a hospedagem -->
+      <a class="btn btn-primary" href="#" id="live-app-link">Acessar aplicação ao vivo</a>
+      <a class="btn btn-outline" href="https://github.com/SEU-USUARIO/educamais" id="repo-link">Ver repositório</a>
+    </div>
+  </div>
+</header>
+
+<section id="sobre">
+  <div class="container">
+    <h2>Sobre o projeto</h2>
+    <p class="lead">
+      No Brasil, muitos estudantes com necessidades especiais enfrentam dificuldades para
+      acessar materiais educativos adaptados às suas necessidades, o que limita suas
+      oportunidades de aprendizado e inclusão. O EducaMais+ propõe uma aplicação web que
+      centraliza esses recursos, facilitando o acesso a materiais didáticos, atividades
+      interativas e ferramentas de apoio — promovendo uma educação mais inclusiva e equitativa.
+    </p>
+  </div>
+</section>
+
+<section id="funcionalidades">
+  <div class="container">
+    <h2>Funcionalidades principais</h2>
+    <p class="lead">Requisitos do sistema, conforme a especificação do projeto.</p>
+    <div class="grid">
+      <div class="card"><span class="icon">🔐</span><h3>Autenticação de usuários</h3><p>Cadastro e login para alunos, tutores e responsáveis.</p></div>
+      <div class="card"><span class="icon">🧩</span><h3>Perfil personalizado</h3><p>Preferências e necessidades específicas de cada usuário.</p></div>
+      <div class="card"><span class="icon">📚</span><h3>Biblioteca de recursos</h3><p>Vídeos, textos e atividades interativas adaptadas.</p></div>
+      <div class="card"><span class="icon">♿</span><h3>Ferramentas de acessibilidade</h3><p>Leitor de tela, ajuste de contraste e de tamanho de fonte.</p></div>
+      <div class="card"><span class="icon">💬</span><h3>Comunidade e suporte</h3><p>Fóruns e chats para troca de experiências e apoio.</p></div>
+      <div class="card"><span class="icon">🔔</span><h3>Notificações</h3><p>Avisos sobre novos recursos e atualizações.</p></div>
+      <div class="card"><span class="icon">🔎</span><h3>Pesquisa avançada</h3><p>Busca por texto, assunto e tipo de material.</p></div>
+      <div class="card"><span class="icon">🔗</span><h3>Integração externa</h3><p>Arquitetura de API REST pronta para integrações futuras.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="arquitetura">
+  <div class="container">
+    <h2>Arquitetura do sistema</h2>
+    <p class="lead">Visão geral de como o frontend, backend e banco de dados se conectam, e onde cada parte é hospedada.</p>
+    <div class="diagram-box">
+      <pre class="mermaid">
+flowchart TB
+    subgraph Cliente["Cliente"]
+      Browser["Navegador do usuário"]
+    end
+    subgraph Frontend["Frontend — React + Vite (hospedado no Vercel)"]
+      SPA["SPA React<br/>React Router + Context API<br/>(Auth e Acessibilidade)"]
+    end
+    subgraph Backend["Backend — Node.js + Express (hospedado no Render)"]
+      API["API REST<br/>JWT + RBAC por papel"]
+      DB[("SQLite<br/>(node:sqlite)")]
+    end
+    Browser --> SPA
+    SPA -- "HTTPS / JSON (fetch)" --> API
+    API --> DB
+    DB --> API
+    API --> SPA
+      </pre>
+    </div>
+  </div>
+</section>
+
+<section id="banco-de-dados">
+  <div class="container">
+    <h2>Modelo de dados</h2>
+    <p class="lead">Diagrama entidade-relacionamento do banco SQLite.</p>
+    <div class="diagram-box">
+      <pre class="mermaid">
+erDiagram
+    USERS ||--o| PROFILES : possui
+    USERS ||--o{ RESOURCES : publica
+    USERS ||--o{ FAVORITES : favorita
+    USERS ||--o{ HISTORY : visualiza
+    USERS ||--o{ FORUM_MESSAGES : escreve
+    USERS ||--o{ NOTIFICATIONS : recebe
+    USERS ||--o{ STUDENT_EVALUATIONS : "avalia (tutor)"
+    RESOURCES ||--o{ FAVORITES : "e favoritado por"
+    RESOURCES ||--o{ HISTORY : "aparece em"
+    FORUM_CHANNELS ||--o{ FORUM_MESSAGES : contem
+
+    USERS {
+        int id PK
+        string name
+        string email
+        string password_hash
+        string role "aluno | tutor | responsavel"
+    }
+    PROFILES {
+        int user_id PK_FK
+        string necessidades
+        string font_size
+        bool high_contrast
+        bool screen_reader
+    }
+    RESOURCES {
+        int id PK
+        string title
+        string type "video | texto | atividade"
+        string subject
+        int created_by FK
+    }
+    FAVORITES {
+        int user_id PK_FK
+        int resource_id PK_FK
+    }
+    FORUM_CHANNELS {
+        int id PK
+        string name
+    }
+    FORUM_MESSAGES {
+        int id PK
+        int channel_id FK
+        int user_id FK
+        string content
+    }
+    NOTIFICATIONS {
+        int id PK
+        int user_id FK
+        string message
+        bool read
+    }
+    STUDENT_EVALUATIONS {
+        int id PK
+        int tutor_id FK
+        int student_id FK
+        int progress
+    }
+      </pre>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="container">
+    <h2>Stack tecnológica</h2>
+    <div class="badge-row">
+      <span class="tech-badge">React 19</span>
+      <span class="tech-badge">Vite</span>
+      <span class="tech-badge">React Router</span>
+      <span class="tech-badge">Node.js 22</span>
+      <span class="tech-badge">Express</span>
+      <span class="tech-badge">SQLite (node:sqlite)</span>
+      <span class="tech-badge">JWT</span>
+      <span class="tech-badge">bcrypt</span>
+      <span class="tech-badge">Vitest + Testing Library</span>
+      <span class="tech-badge">Node Test Runner + Supertest</span>
+      <span class="tech-badge">Deploy: Render + Vercel</span>
+    </div>
+  </div>
+</section>
+
+<section id="links">
+  <div class="container">
+    <h2>Documentação completa</h2>
+    <p class="lead">Guias detalhados estão no repositório:</p>
+    <div class="grid">
+      <div class="card"><a href="../README.md"><h3>📖 README</h3></a><p>Instalação e execução local (backend + frontend).</p></div>
+      <div class="card"><a href="ARCHITECTURE.md"><h3>🏗️ ARCHITECTURE.md</h3></a><p>Decisões técnicas e estrutura de pastas.</p></div>
+      <div class="card"><a href="USER_GUIDE.md"><h3>👩‍🏫 USER_GUIDE.md</h3></a><p>Como usar a plataforma em cada papel (aluno/tutor/responsável).</p></div>
+      <div class="card"><a href="API.md"><h3>🔌 API.md</h3></a><p>Referência de todos os endpoints da API REST.</p></div>
+      <div class="card"><a href="DEPLOY.md"><h3>🚀 DEPLOY.md</h3></a><p>Passo a passo de publicação no Render e Vercel.</p></div>
+      <div class="card"><a href="TESTING.md"><h3>🧪 TESTING.md</h3></a><p>Como rodar os testes automatizados e o roteiro de testes de usabilidade.</p></div>
+    </div>
+    <p style="margin-top:24px" class="placeholder-note">
+      Nota: os links "Acessar aplicação ao vivo" e "Ver repositório" no topo desta página
+      precisam ser atualizados com as URLs reais após a hospedagem e a criação do
+      repositório no GitHub.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    EducaMais+ — Projeto acadêmico de educação inclusiva.
+  </div>
+</footer>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral', fontFamily: 'Atkinson Hyperlegible' });
+</script>
+
+</body>
+</html>

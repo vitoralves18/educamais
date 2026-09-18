@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: educamais-api
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm run render-start
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false   # preencher manualmente com a URL do Vercel após o primeiro deploy (ex: https://educamais.vercel.app)
+    healthCheckPath: /api/health
